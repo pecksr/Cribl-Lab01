@@ -1,21 +1,21 @@
-What is Stream?
+#What is Stream?
 
 Cribl Stream is an observability pipeline tool living between any data source and any destination. These destinations can be systems of analysis (Splunk, Elastic, etc.) or systems of retention (S3 buckets, Data Lakes, etc.). Stream routes, reduces, replays and redacts data sources in flight.
 
-Basic Elements
+#Basic Elements
 
 Stream uses Sources, Destinations, Routes and Pipelines to move data coming from its sources, processes through its pipelines (group of functions) and send the results to one or many destinations in the format that is best for the environment and its use cases.
 
 This Labs has 3 parts:
-Part 1 – Introduction to Stream elements
-Part 2 – Routes and Pipelines
-Part 3 – Answering to Use Cases
+**Part 1 – **Introduction to Stream elements
+**Part 2 – **Routes and Pipelines
+**Part 3 – **Answering to Use Cases
 
 Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to: [Cribl](http://10.233.36.248:9000)
 Login as Admin with the password of Go2atc4labs!
  
  
-Part 1 – Introduction to Stream elements
+##Part 1 – Introduction to Stream elements
 
 1.  Review Sources and Destinations
 
@@ -191,7 +191,7 @@ On the right pane click on ‘Send to Routes’
 From the new context window click Yes
 Click Save.
  
-Part 2 – Routes and Pipelines
+##Part 2 – Routes and Pipelines
 
 Now we have successfully sent data via QuickConnect lets use Routes to send data to the same destinations. 
 First let’s enable another Source from our Datagen (windows_xml) 
