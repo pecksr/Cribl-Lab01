@@ -9,7 +9,7 @@ Part 1 – Introduction to Stream elements
 Part 2 – Routes and Pipelines
 Part 3 – Answering to Use Cases
 
-Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to: http://10.233.36.248:9000
+Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to: [Cribl](http://10.233.36.248:9000)
 Login as Admin with the password of Go2atc4labs!
  
  
@@ -29,7 +29,7 @@ There may be Streaming, No Streaming and Other Destinations. These destinations 
 Streaming Destination will forward a continuous flow of data out of Stream to systems or connoting points such as Splunk HEC
 Non-Stream Destination wills send data to retention endpoints such as S3 buckets, Azure Blob Storage and others.
 Other Destinations will serve special purposes within the data flow.
-<https://docs.cribl.io/logstream/destinations>
+[Destinations}(https://docs.cribl.io/logstream/destinations)
 
 Task 01 
 Select Data/Sources > Sources from the top menu
