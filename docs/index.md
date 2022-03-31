@@ -275,9 +275,60 @@ Let’s create a simple pipeline to process our Syslog source.
 
 ![Cribl-Lab01-15](_images/Cribl-Lab01-15.png)
 
+- On the left pane, enter only the ID as Syslog_test and click Save.
+
 ### 5.  Add functions to the pipeline
-### 6.  Test changes on the sample files before sending out to a destination
+
+- Click on the ‘+ Function’ button on the right most side within the newly create Pipeline
+
+![Cribl-Lab01-16](_images/Cribl-Lab01-16.png)
+
+- Mouse click Standard / Eval or type Eval on the mini search bar and click Eval. 
+- In the Function values enter the word ‘message’ (no quotes) in the Remove Fields field and click Save.
+- Make sure your Syslog_sample.log sample file is load on the right pane and validate the results by clicking on the OUT button on the top bar within the Sample data loaded.
+
+![Cribl-Lab01-17](_images/Cribl-Lab01-17.png)
+
+Now that we have excluded the field message from the processing logs, lets use another select and use another Function “Drop” and reduce our data even further.
+- On the left pane click on the ‘+ Function’ button and select Standard/Drop or type Drop on the mini search bar and click on the result.
+- With the Function loaded, enter the following values in the field Filter: appname==’itaque’
+
+![Cribl-Lab01-18](_images/Cribl-Lab01-18.png)
+
+*Note the events matching the filter in the Drop function are greyed out and not send to the destination reducing the number of events.*
+
+Let’s add another function to change/redact our data
+
+- From the top bar on the left pane click on the “+ Function” button and select Standard/Rename or type Rename in the mini search bar and click on the result. 
+- In the Function click the “+ Add field” button
+- Within the Rename fields group type  facilityName in the Current name and NEW_facility_Name in the New Name fields
+- Click Save
+
+Observe the results on the right pane with the syslog_sample.log file selected and the OUT button enabled
+
+![Cribl-Lab01-19](_images/Cribl-Lab01-19.png)
+
+Now we have defined a Pipeline we need to attach it to a Route.
+
+### 6.  Add a Pipeline to the Route
+
+- On the left pane within your Splunk_test Pipeline, click on the top left link “Attach to Route”
+
+You will be brought to the Routes list. 
+- Select the Syslog_to_Splunk Ruote (created by you earlier)
+- In Pipeline select Splunk_test
+
 ### 7.  Apply the destination to the Route
+
+Now lets apply the destination that will receive the process stream from this Route.
+- From Output select splunk:SplunkCriblLab
+- In Description enter: “Sending Syslog data to Splunk”
+- Final toggle set to No
+- Click Save
+
+![Cribl-Lab01-20](_images/Cribl-Lab01-20.png)
+
+
 ### 8.  Analyze results on Splunk or Elastic (no dashboards provided for this part)
 
 
