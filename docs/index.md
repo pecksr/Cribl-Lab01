@@ -266,6 +266,15 @@ On the new context window validate you are capturing samples from your configure
 ![Cribl-Lab01-14](_images/Cribl-Lab01-14.png)
 
 ### 4.  Create a Pipeline
+
+Let’s create a simple pipeline to process our Syslog source.
+
+- Go to the top menu and select Processing / Pipelines
+- On the right pane click on the Syslog_sample.log sample file (we will use the captured sample with this Pipeline)
+- On the left pane at the top click the ‘+ Pipeline’ button and select ‘Create Pipeline’
+
+![Cribl-Lab01-15](_images/Cribl-Lab01-15.png)
+
 ### 5.  Add functions to the pipeline
 ### 6.  Test changes on the sample files before sending out to a destination
 ### 7.  Apply the destination to the Route
