@@ -36,7 +36,6 @@ Non-Stream Destination wills send data to retention endpoints such as S3 buckets
 Other Destinations will serve special purposes within the data flow.
 [Destinations}(https://docs.cribl.io/logstream/destinations)
 
-## Task 01 
 
 - Select Data/Sources > Sources from the top menu
 - Explore all sources available, filter at the bottom selected top menu for Collectors, Push, Pull, System and Internal sources.
@@ -50,7 +49,6 @@ Your sources are listed on the left and under Manage Syslog Sources you may conf
 
 ![Cribl-Lab01-2](_images/Cribl-Lab01-2.png)
 
-## Task 02 
  
 ### 2.  Configure a Source
 - From the top menu select Data/Sources > Sources then from Push select Syslog
@@ -68,7 +66,6 @@ Your source has been configured, in this case Syslog, you may now send data from
 
 *Note: no data has been stored on Cribl Stream.* 
  
-## Task 03
 
 ### 3.  Configure a Splunk Destination
 - Select Data/Sources > Destinations
