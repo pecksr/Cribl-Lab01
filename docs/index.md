@@ -543,11 +543,11 @@ Enter the following values:
 - Tags: <LEAVE_EMPTY>
 - Click save 
  
-Follwing the same process as in Task 04, validate the configuration for the new Destinatin (MinIO_Big_Json) by clicking at it and selecting Test from the top menu. 
+Following the same process as in Task 04, validate the configuration for the new Destinatin (MinIO_Big_Json) by clicking at it and selecting Test from the top menu. 
 - From Select Sample: choose big_json.log
 - Click the Run Test button (at the top right) 
  
-## You should have the following results: 
+**You should have the following results:** 
 
 ![Cribl-Lab01-35](_images/Cribl-Lab01-35.png)
 
