@@ -328,4 +328,53 @@ Now lets apply the destination that will receive the process stream from this Ro
 
 ### 8.  Analyze results on Splunk or Elastic (no dashboards provided for this part)
 
+Mouse over the Single Instance (SplunkCriblLab) Destination and click ‘Capture’ to display if data is being sent to the selected destination. 
+From the new context window validate if syslog data (your datagen source in this case) is being sent to the Splunk Single Instance configured.
+
+![Cribl-Lab01-21](_images/Cribl-Lab01-21.png)
+
+Follow the same process to add Elasticsearch as a second destination receiving the same source (Datagen syslog) already sending data to Splunk Single Instance.
+Mouse over Elasticsearch and click on ‘Capture’ to validate if data is being sent to the configured destination.
+ 
+Disconnecting the QuickConnect Routes
+Now select from the top menu Data/Sources and click the Datagen tile. 
+In the syslog datagen source click on ‘Connected Destinations’ from the left menu.
+On the right pane click on ‘Send to Routes’
+From the new context window click Yes
+Click Save.
+ 
+ 
+##Part 2
+
+Now we have successfully sent data via QuickConnect lets use Routes to send data to the same destinations. 
+First lets enable another Source from our Datagen (windows_xml) 
+ 
+###1.  Enable a new source
+- From the top menu click on Data/Source
+- Click on the Datagen tile 
+- From the Managed Datagen Sources pane click on the no toggle under the Enable column on the windows_xml source.
+- On the new context window click Yes.
+- On the same source (windows_xml) click on Live under the Status column and validate the proper sources is being generated.
+- Click on the top X on the opened context window. 
+          
+###2.  Create a new Route
+We’ll create 2 new routes for this part of our lab. 
+We need to connect existing sources (using datagen) and capture sample data from each route to be used on our future “Pipelining” process. 
+These sources are: syslog and windows_xml
+ 
+- From the top menu select Routing/Data Routes
+- In the Routes panel (left) click the + Route to add a new Route to the existing ones. 
+
+![Cribl-Lab01-22](_images/Cribl-Lab01-22.png)
+
+- On the newly create Route enter the following values:
+- Route Name*: to_Splunk
+- Filter:  select   __inputId=='datagen:windows_xml'
+- Pipeline*: passthru
+- Enable Expression: No
+- Output: select   default:default
+- Description: First route to Splunk
+- Final: No
+
+![Cribl-Lab01-23](_images/Cribl-Lab01-23.png)
 
