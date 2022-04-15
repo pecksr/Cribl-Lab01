@@ -328,4 +328,553 @@ Now lets apply the destination that will receive the process stream from this Ro
 
 ### 8.  Analyze results on Splunk or Elastic (no dashboards provided for this part)
 
+Mouse over the Single Instance (SplunkCriblLab) Destination and click ‘Capture’ to display if data is being sent to the selected destination. 
+From the new context window validate if syslog data (your datagen source in this case) is being sent to the Splunk Single Instance configured.
+
+![Cribl-Lab01-21](_images/Cribl-Lab01-21.png)
+
+Follow the same process to add Elasticsearch as a second destination receiving the same source (Datagen syslog) already sending data to Splunk Single Instance.
+Mouse over Elasticsearch and click on ‘Capture’ to validate if data is being sent to the configured destination.
+ 
+### Disconnecting the QuickConnect Routes
+Now select from the top menu Data/Sources and click the Datagen tile. 
+- In the syslog datagen source click on ‘Connected Destinations’ from the left menu.
+- On the right pane click on ‘Send to Routes’
+- From the new context window click Yes
+- Click Save.
+ 
+ 
+## Part 2
+
+Now we have successfully sent data via QuickConnect lets use Routes to send data to the same destinations. 
+First lets enable another Source from our Datagen (windows_xml) 
+ 
+### 1.  Enable a new source
+- From the top menu click on Data/Source
+- Click on the Datagen tile 
+- From the Managed Datagen Sources pane click on the no toggle under the Enable column on the windows_xml source.
+- On the new context window click Yes.
+- On the same source (windows_xml) click on Live under the Status column and validate the proper sources is being generated.
+- Click on the top X on the opened context window. 
+          
+### 2.  Create a new Route
+We’ll create 2 new routes for this part of our lab. 
+We need to connect existing sources (using datagen) and capture sample data from each route to be used on our future “Pipelining” process. 
+These sources are: syslog and windows_xml
+ 
+- From the top menu select Routing/Data Routes
+- In the Routes panel (left) click the + Route to add a new Route to the existing ones. 
+
+![Cribl-Lab01-22](_images/Cribl-Lab01-22.png)
+
+- On the newly create Route enter the following values:
+- Route Name*: to_Splunk
+- Filter:  select   __inputId=='datagen:windows_xml'
+- Pipeline*: passthru
+- Enable Expression: No
+- Output: select   default:default
+- Description: First route to Splunk
+- Final: No
+
+![Cribl-Lab01-23](_images/Cribl-Lab01-23.png)
+
+- Click Save
+ 
+### 1.  Capture sample data from the route created
+ 
+Make sure your new route is not below any other routes with the Final toggle set to yes, if it is drag it above that final route. 
+From the to_Splunk Route click on the most left 3 dots and select Capture
+
+![Cribl-Lab01-24](_images/Cribl-Lab01-24.png)
+
+On the new context window validate you are capturing samples from your configured Route:
+
+![Cribl-Lab01-25](_images/Cribl-Lab01-25.png)
+
+- At the bottom right click on Save as Sample File
+
+On the new context window enter the following values:
+
+- File Name*: windows_xml_sample.log
+- Description: <LEAVE_EMPTY>
+- Expiration (hours): <LEAVE_EMPTY>
+- Tags: <LEAVE_EMPTY>
+ 
+From the right pane validate if your sample file has been created (if not refresh your browser) 
+Under Preview click Simple an validate your sample data from your Route. 
+ 
+![Cribl-Lab01-26](_images/Cribl-Lab01-26.png)
+
+### 1.  Create a Pipeline
+Let’s create a simple pipeline to process our Syslog source. 
+- Go to the top menu and select Processing / Pipelines
+- On the right pane click on the Syslog_sample.log sample file (we will use the captured sample with this Pipeline)
+- On the left pane at the top click the ‘+ Pipeline’ button and select ‘Create Pipeline’
+
+![Cribl-Lab01-27](_images/Cribl-Lab01-27.png)
+
+One the left pane enter only the ID as Syslog_test and click Save.
+ 
+### 2.  Add functions to the pipeline
+Click on the ‘+ Function’ button on the right most side within the newly create Pipeline
+
+![Cribl-Lab01-28](_images/Cribl-Lab01-28.png)
+
+- Mouse click Standard / Eval or type Eval on the mini search bar and click Eval. 
+- In the Function values enter the word ‘message’ (no quotes) in the Remove Fields field and click Save.
+Make sure your Syslog_sample.log sample file is load on the right pane and validate the results by clicking on the OUT button on the top bar within the Sample data loaded.
+
+![Cribl-Lab01-29](_images/Cribl-Lab01-29.png)
+
+Now that we have excluded the field message from the processing logs, lets use another select and use another Function “Drop” and reduce our data even further.
+- On the left pane click on the ‘+ Function’ button and select Standard/Drop or type Drop on the mini search bar and click on the result.
+- With the Function loaded enter the following values in the field Filter: appname==’itaque’
+
+![Cribl-Lab01-30](_images/Cribl-Lab01-30.png)
+
+Note the events matching the filter in the Drop function are greyed out and not send to the destination reducing the number of events. 
+Let’s add another function to change/redact our data
+- From the top bar on the left pane click on the “+ Function” button and select Standard/Rename or type Rename in the mini search bar and click on the result. 
+- In the Function click the “+ Add field” button
+- Within the Rename fields group type  facilityName in the Current name and NEW_facility_Name in the New Name fields
+- Click Save
+
+Observe the results on the right pane with the syslog_sample.log file selected and the OUT button enabled
+
+![Cribl-Lab01-31](_images/Cribl-Lab01-31.png)
+
+Now we have defined a Pipeline we need to attach it to a Route.
+
+### 3.  Add a Pipeline to the Route
+- On the left pane within your Splunk_test Pipeline, click on the top left link “Attach to Route”
+
+You will be brought to the Routes list. 
+- Select the Syslog_to_Splunk Ruote (created by you earlier)
+- In Pipeline select Splunk_test
+ 
+### 4.  Apply the destination to the Route
+Now lets apply the destination that will receive the process stream from this Route.
+
+- From Output select splunk:SplunkCriblLab
+- In Description enter: “Sending Syslog data to Splunk”
+- Final toggle set to No
+- Click Save
+
+![Cribl-Lab01-32](_images/Cribl-Lab01-32.png)
+
+### 5.  Analyze results on Splunk or Elastic (no dashboards provided for this part)
+ 
+ 
+## Part 3 Cribl Stream Use Cases
+ 
+### Reduction
+Let’s put in practice some of the techniques we learned so far.
+Reduction can be done through a series of functions in a pipeline, we will use 2 simple examples on different sources.
+ 
+### 1.  Use the Json reduction elements
+
+Check if your data source is active and running: 
+Data / Source / DataGen
+- Big_JSON source should be active and live. (take a look by clicking in the live button) 
+- After data stops flowing click on the bottom right button “Save as Sample File”
+
+On the Sample Files Settings use the following values:
+- File Name: big_json.log
+- Description: <LEAVE_BLANK>
+- Expiration (hours): delete any values and leave in blank, if you add any number (hours) the sample will be removed after this time.
+- Tags: <LEAVE_BLANK>
+ 
+- Click Save
+ 
+Create a new pipeline from Processing / Pipelines (note your sample file “big_json_data.log” listed on the right panel)
+- Click in the + Pipeline button (top right of the pipelines panel)  / Create Pipeline
+- Enter Reduction for ID
+Leave all other fields as they are. 
+- Click on the top right button (+ Function) to add a function to the Reduction Pipeline
+- From the list select Standard / Parser
+
+Load your sample file (big_json_data.log) from the right panel and expand the _raw field to see its contents. 
+for this use case  we will remove the multiValueHeaders field (which has the same value as the headers) and eliminate any fields that contain the value “null” 
+
+Enter the following values for the Parser function you’ve just created:
+- Filter: true
+- Descripgion: <LEAVE_BLANK>
+- Final: No
+- Operation Mode: Reserialize
+- Type: JSON Object
+- Source Field: _raw
+- Destination Field: <LEAVE_BLANK>
+- List of Fields: <LEAVE_BLANK>
+- Fields To Keep: <LEAVE_BLANK>
+- Fields To Remove: multiValueHeaders.* 
+- Fields Filter Expression: value != null
+ 
+You should see the fields removed on the right panel with the big_json_data.log sample loaded and by clicking the top left OUT button (in the sample panel) 
+
+![Cribl-Lab01-33](_images/Cribl-Lab01-33.png)
+
+Visualize results on Cribl Stream basic statistics (no system of analysis required)
+- At the top right click on the Basic Statistics icon (to the left of the Select Fields) drop down within the Sample panel:
+
+![Cribl-Lab01-34](_images/Cribl-Lab01-34.png)
+
+## You reduced 44.19% of this data source. 
+ 
+### 1.  Create a new S3 destination for the Big Json data reduced.
+ 
+Just as we did in the **Configure a S3 Bucket as Destination** task lets configure a new destination to our S3 storage using a new bucket for this data source (big-json)
+ 
+- From the top menu select Data / Destinations. 
+- From the list of integrations select the MinIO tile
+- Click on Add New From the top right button
+
+Enter the following values: 
+- Output ID: Big_Json_reduced
+- MinIO Endpoint*: http://192.168.2.52:9000
+- MinIO Bucket Name*: ‘big-json’
+- Staging Location*: $CRIBL_HOME/state/outputs/staging
+- Key Prefix*: Cribl
+- Partitioning Expression: C.Time.strftime(_time ? _time : Date.now()/1000, '%Y/%m/%d')
+- Data Format: json
+- File Name Prefix Expression:  `CriblOut`
+- File Name Suffix Expression:  `.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}`
+- Compress: none
+- Backpressure behavior: Block
+- Tags: <LEAVE_EMPTY>
+- Click save 
+ 
+Following the same process as in the **Configure a S3 Bucket as Destination** task, validate the configuration for the new Destination (MinIO_Big_Json) 
+
+- Clicking on it and selecting Test from the top menu. 
+- From Select Sample: choose big_json.log
+- Click the Run Test button (at the top right) 
+ 
+**You should have the following results:** 
+
+![Cribl-Lab01-35](_images/Cribl-Lab01-35.png)
+
+### 2.  Send data to a S3 bucket (WWT will use an internal MinIO) 
+ 
+To send data to the S3 bucket lets create a new route. 
+- From Routing / Data Routes Click the + Route at the top right button within the Routes panel (left)
+- 
+Enter the following values: 
+ 
+- Route Name*: Big_json_to_S3
+- Filter: __inputId=='datagen:Big_JSON'
+- Pipeline*: Reduction
+- Enable Expression: No
+- Output: minio:Big_Json_reduced
+- Description: <LEAVE_BLANK>
+- Final: No
+
+![Cribl-Lab01-36](_images/Cribl-Lab01-36.png)
+
+- Click Save
+ 
+ 
+ 
+### 3.  Check if data has arrived on the S3 bucket. 
+ 
+From the Routes panel, observe that the recentily created Route now is sending data to the S3 bucket
+
+![Cribl-Lab01-37](_images/Cribl-Lab01-37.png)
+
+- Click on the three dots next to the On toggle and select Capture 
+
+You should see data coming from your Source, being processed by your Pipeline and sent to your Destination:
+
+![Cribl-Lab01-38](_images/Cribl-Lab01-38.png)
+
+- Click Cancel (we already have a sample file for this data captured at the Source)
+ 
+ 
+## Replay
+ 
+### 1.  Configure a S3 Collector Source utilizing the S3 bucket created above
+ 
+Now let’s replay the data sent into the S3 bucket configured above (Big_Json_reduced)
+
+- Go to the main menu at the top and select Sources
+- Click on the S3 Collector tile 
+- Click on the + Add New button at the top right and enter the following values: 
+ 
+- Collector ID: Big_Json_Collect
+- Auto-populate from: <LEAVE_BLANK>
+- S3 Bucket: ‘big-json’
+- Region: <LEAVE_BLANK>
+- Path: /Cribl/${_time:%Y}/${_time:%m}/${_time:%d}/
+- Path Extractors: <LEAVE_BLANK>
+- Recursive: Yes
+- Max Batch Size (objects): 10
+ 
+- Click on AUTHENTICATION expansion
+- Authentication Method: Manual
+- Access Key: admin
+-Secret Key: Go2atc4labs!
+ 
+From the menu on the left select:
+
+- Results Settings / Fields 
+- Click on Event Breakers 
+- On the right click on + Add Ruleset
+- Select Cribl (ndjson breaker)
+- Click on Fields on the left
+
+- Click on the + Add Field and enter the following values:
+- Name: source
+- Value: 'big-json-from-collector'
+- Click on Result Routing on the left
+- Enter the following values on the right: 
+- Send to Routes: Yes
+- Pre-Processing Pipeline: time_adjustment
+- Throttling: 0
+ 
+Leave all other fields unchanged
+ 
+- Click Save
+
+![Cribl-Lab01-39](_images/Cribl-Lab01-39.png)
+
+### 2.  Replay data in preview mode within Cribl Stream
+
+- Back to the Collectors Source from the Big_Json_Collect item in Actions column click Run
+- Select Preview and leave all fields unchanged
+- Click Run
+ 
+You should have data coming from the S3 Bucket configured with data already reduced by Cribl on the Reduction pipeline earlier.
+ 
+![Cribl-Lab01-40](_images/Cribl-Lab01-40.png)
+
+### 3.  Create another route or utilize an existing one (Splunk or Elastic) 
+
+- From the top menu select Routing / Data Routes
+- From the Existing to_Splunk route select filter and change from __inputId=='datagen:windows_xml' to __inputId=='datagen:Big_JSON'
+- Keep the Pipeline as passthru
+- Change the default Destination Output to minio:Big_Json_reduced
+- Leave all other fields and toggles unchanged
+- Click Save
+
+![Cribl-Lab01-41](_images/Cribl-Lab01-41.png)
+
+Validate if data is being sent to the S3 bucket.
+
+- Within the Big_Json_to_S3 route configured above, click on the 3 dots to the left of the On toggle:
+
+![Cribl-Lab01-42](_images/Cribl-Lab01-42.png)
+
+- Select Capture
+- 
+You should see data going out to the S3 bucket configured
+
+![Cribl-Lab01-43](_images/Cribl-Lab01-43.png)
+
+### 4.  Send data from the S3 bucket in Full mode to route
+
+Now that we’ve configured a new route capable to send data to a S3 bucket (using MinIO as destination) and collect data from a S3 bucket (using S3 collector as source). 
+We are already sending data in its full fidelity stage to our S3 bucket, we will now collect that data, apply a pipeline for a Reduction use case and send that data (reduced) to our Splunk Destination. 
+
+Let’s use the existing to_Splunk route and modify its filter, Pipeline.
+
+Expand the to_Splunk route and enter/modify the following values:
+
+- Route Name*: <NO_CHANGE>
+- Filter: source == 'big-json-from-collector'
+- Pipeline: Reduction
+- Output: <NO_CHANGE>
+- Description: <NO_CHANGE>
+ 
+- Click Save
+
+![Cribl-Lab01-44](_images/Cribl-Lab01-44.png)
+
+- Select Data / Sources from the top menu
+- Click on the S3 tile
+- In the Big_Json_Collect source click on Run under the Actions column.
+- In the context window select Full Run 
+- Click Run
+
+![Cribl-Lab01-45](_images/Cribl-Lab01-45.png)
+
+**Note: for this exercise we used the ad-hoc Full Run function, normally S3 Collectors utilize a scheduler to collect and send the results through the available routes that will forward the data to one or many destinations.
+
+Now let’s check Splunk and validate the data is arriving at its destination after being reduced by Cribl Stream.
+ 
+- From your Jump Box, open a new browser window
+- Navigate to: http: 10.0.53.55:8000
+- Username: admin
+- Password: Go2atc4labs!
+- From the Apps menu select Search & Reporting
+- In the Search field enter the following search: index=big_json 
+- At the end of the search command line select the time picker for last 15 minutes
+
+You should see the following results:
+
+![Cribl-Lab01-46](_images/Cribl-Lab01-46.png)
+
+**Go back to Routes in Cribl Stream
+
+- On the to_Splunk route Click on the On/Off toggle placing in the Off position
+ 
+ 
+### 7.  Send data to Elastic
+
+Now that we already send data to MinIO (S3), replayed that data with our S3 Collector then sent the replay to an Splunk instance, we will now send a different source using Syslog data (previously configured in this Lab) to Elastic Search and validate the results in Kibana.
+ 
+- From the top menu in Cribl Stream click on Routing / Data Sources
+- Expand the to_Elastic route (previously configured in this lab)
+ 
+Enter the following values: 
+
+- Route Name*: <NO_CHANGE>
+- Filter: __inputId=='datagen:syslog'
+- Pipeline: passthru
+- Output: <NO_CHANGE>
+- Description: <NO_CHANGE>
+- Final: No
+
+Leave all other fields unchanged
+
+- Click Save
+ 
+- From your Jump Box, open a new browser window
+- Navigate to: http://10.0.53.59:5601
+- No username or password used with Kibana
+- In Kibana on the top click on the hamburger menu
+- Select Analytics / Discover
+- Change the Index Pattern to cribl* under the + Add filter link
+- Click on the Time Picker to the left of the Search command line 
+- Select Last 30 Minutes
+- Click Apply
+ 
+You should see the Syslog data ingested into Elastic Search:
+
+![Cribl-Lab01-47](_images/Cribl-Lab01-47.png)
+
+- Go back to Routes in Cribl Stream
+- On the to_Elastic route Click on the On/Off toggle placing in the Off position
+ 
+ 
+## Redact
+
+For the Redacting Use Case we will use a different data source (Business Events). The data source is already configured as a Data Gen source but we need to capture a sample file intoerder to work in our redaction before we send any data into any system of analysis. 
+ 
+- In Cribl Stream top menu select Data / Sources
+- Click on the Datagen tile 
+- Select the Business_Events Data Gen source
+- Click on Live Data
+- When the capture ends click on the Save as Sample File on the bottom right
+- Enter the following values: 
+- File Name*: Business_events.log
+- Description: <LEAVE_BLANK>
+- Expiration (hours): delete any number in this field or the sample file will be removed after this value in hours
+- Tags: <LEAVE_BLANK>
+
+![Cribl-Lab01-48](_images/Cribl-Lab01-48.png)
+
+### 1. Use existing sources
+
+**Lets create a new Pipeline and attach it to an existing route
+ 
+- From the main menu at the top select Processing / Pipelines
+- On the top button at the right click on + Pipeline and select Create Pipeline
+- Name the Pipeline Redact
+
+### 2.  Create a  Mask Function In the Redact Pipeline
+
+- From the top click on the + Function and select Mask
+
+Add the following values to the fields in the Mask Function:
+- Filter: true
+- Description: <LEAVE_BLANK>
+- Final: No
+
+In the Masking Rules* add 2 rules:
+**Social Security Masking**
+Match Regex
+(social=)([0-9]{3}-?[0-9]{2}-?[0-9]{4})
+Replace Expression:
+`${g1}${C.Mask.md5(g2, g2)}`
+
+**Credit Cards Identify and Hash**
+Match Regex
+([0-9]{14,16})  ---- Make sure to click on the flags icon and select /g for Global
+Replace Expression
+C.Mask.isCC(g1) ? C.Mask.md5(g1, g1.length) : g1
+Apply to Fields:  *
+ 
+- Click Save
+
+![Cribl-Lab01-49](_images/Cribl-Lab01-49.png)
+
+### 1. The Mask Function
+
+The Mask Function has redacted your Social Security and identified a CC number from a common regex pattern distinguishing real CC from regular values and added a hash to both using the same size from the second groups captured in the regex. This Function can be used by several redacting use cases (I.E.: PII data)
+
+Let’s add a Parser Function and extract fields from the Businessevents.log and validate if the Social and Creditcard fields have been redacted/masked as desired. We can validate that by reading from the _raw but lets exercise what we’ve learned in this Lab. 
+ 
+- Click on the + Function button and selecting Parser
+- From the top right in the left panel (in the Redact Pipeline) click the + Function 
+- Select Parser
+
+Enter the following values: 
+- Filter: true
+- Description: <LEAVE_BLANK>
+- Final: No
+- Operation Mode*: Extract
+- Type*: Key=Value Pairs
+- Library: <LEAVE_BLANK>
+- Source Field: _raw
+- Desination Field: <LEAVE_BLANK>
+- Clean Fields: Yes
+- List of Fields: <LEAVE_BLANK>
+- Fields to Keep: <LEAVE_BLANK>
+- Fields to Remove: <LEAVE_BLANK>
+- Fields Filter Expression: <LEAVE_BLANK>
+ 
+- Click Save
+
+![Cribl-Lab01-50](_images/Cribl-Lab01-50.png)
+
+### 2.  Validate on the Sample file within Cribl Stream.
+ 
+- On the right panel (Sample files) make sure the Bussinesevents.log is loaded
+- Click on the OUT at the top left in the Sample Data panel (right)
+
+You should see several fields extracted (Parser function) within these fields validate if the Social and Creditcard fields:
+
+![Cribl-Lab01-51](_images/Cribl-Lab01-51.png)
+
+### 3.  Add an index name and send data to Splunk using a Pipeline
+
+Let’s add an index name in this Pipeline and send this data to Splunk (could be Elastic as well) 
+
+- In the same Pipeline (Redact) click the + Function button on the top right within the left panel (the Redact Pipeline)
+- Select Eval
+- Enter the following values: 
+- Filter: true
+- Description: <LEAVE_BLANK>
+- Final: No
+- Evaluate Fields: + Add Field
+- Name: index
+- Value Expression: ‘businessevents’
+- Keep Fields: <LEAVE_BLANK>
+- Remove Fields: <LEAVE_BLANK>
+- Click Save
+
+![Cribl-Lab01-52](_images/Cribl-Lab01-52.png)
+
+**Send data to Splunk and validate if the fields and values were indexed correctly for the Redact Pipeline
+
+- From your Jump Box, open a new browser window
+- Navigate to: http: 10.0.53.55:8000
+- Username: admin
+- Password: Go2atc4labs!
+- From the Apps menu select Search & Reporting
+- In the Search field enter the following search: index=businessevents
+- At the end of the search command line select the time picker for last 24 hours
+
+**You should see the following results (Note the Cardnumbers are hashed as the Social values as well):
+
+![Cribl-Lab01-53](_images/Cribl-Lab01-53.png)
 
