@@ -522,7 +522,7 @@ Visualize results on Cribl Stream basic statistics (no system of analysis requir
  
 ### 1.  Create a new S3 destination for the Big Json data reduced.
  
-From Task 04 above (Configure a S3 Bucket as Destination) lets configure a new destination to our S3 storage using a new bucket for this data source (big-json)
+Just as we did in the **Configure a S3 Bucket as Destination** task lets configure a new destination to our S3 storage using a new bucket for this data source (big-json)
  
 - From the top menu select Data / Destinations. 
 - From the list of integrations select the MinIO tile
@@ -543,7 +543,9 @@ Enter the following values:
 - Tags: <LEAVE_EMPTY>
 - Click save 
  
-Following the same process as in Task 04, validate the configuration for the new Destinatin (MinIO_Big_Json) by clicking at it and selecting Test from the top menu. 
+Following the same process as in the **Configure a S3 Bucket as Destination** task, validate the configuration for the new Destination (MinIO_Big_Json) 
+
+- Clicking on it and selecting Test from the top menu. 
 - From Select Sample: choose big_json.log
 - Click the Run Test button (at the top right) 
  
