@@ -128,8 +128,8 @@ For this task we will use an internal object storage solution to represent the S
 - Key Prefix*: Cribl
 - Partitioning Expression: C.Time.strftime(_time ? _time : Date.now()/1000, '%Y/%m/%d')
 - Data Format: json
-- File Name Prefix Expression:  `CriblOut`
-- File Name Suffix Expression:  `.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}`
+- File Name Prefix Expression:  ```CriblOut```
+- File Name Suffix Expression:  ```.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}```
 - Compress: none
 - Backpressure behavior: Block
 - Tags: <LEAVE_EMPTY>
