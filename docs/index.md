@@ -1,4 +1,4 @@
-# What is Stream?
+# What is Cribl Stream?
 
 Cribl Stream is an observability pipeline tool living between any data source and any destination. These destinations can be systems of analysis (Splunk, Elastic, etc.) or systems of retention (S3 buckets, Data Lakes, etc.). Stream routes, reduces, replays and redacts data sources in flight.
 
@@ -14,6 +14,42 @@ Stream uses Sources, Destinations, Routes and Pipelines to move data coming from
 
 **Module 3 – Answering to Use Cases**
 
+**Estimated Completion Time:** 1 Hour
+
+## Solution Overview
+
+Solution overview paragraph
+
+## Environment Overview
+
+### Lab Diagram
+
+![lab name](_images/placeholder.png)
+
+### Hardware and Software
+
+#### Category 1 Title
+
+- Item 1
+- Item 2
+
+#### Category X Title
+
+- Item 1
+- Item X
+
+## Target Audience
+
+Paragraph detailing the intended audience for the lab.
+
+## Before You Begin
+
+Paragraph indicating any or no pre reqs for the lab. Also include any helpful knowledge to have before beginning.
+
+## Learning Outcomes
+
+Paragraph describing the outcomes a student should expect upon completion.
+
 Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to: [Cribl](http://10.233.36.248:9000)
 Login as Admin with the password of Go2atc4labs!
  
@@ -22,13 +58,13 @@ Login as Admin with the password of Go2atc4labs!
 
 ### 1.  Review Sources and Destinations
 
-Sources
+**Sources**
 LogStream can receive continuous data input from various Sources, including Splunk, HTTP, Elastic Beats, Kinesis, Kafka, TCP JSON, and many others.
 Sources can be of a Push or Pull type where Push sources can forward data into Cribl Stream as any other receiving system (Syslog, Splunk, etc.). 
 Data from these Sources is normally sent to a set of LogStream Workers through a load balancer. Some Sources, such as Splunk forwarders, have native load-balancing capabilities, so you should point these directly at LogStream.
 Pull sources can interact with Stream via REST APIs or other methods available within Stream integrations. For sources not necessarily integrated with Stream Scripts may also be used to collect data from Pull sources.
 
-Destinations
+**Destinations**
 Stream can send data to multiple destinations. These destinations may have native interactions as in sources or being sent at the protocol level such as Syslog, TCP, TCP/Json etc.
 There may be Streaming, No Streaming and Other Destinations. These destinations can have integrations (as in Sources) or 
 Streaming Destination will forward a continuous flow of data out of Stream to systems or connoting points such as Splunk HEC
