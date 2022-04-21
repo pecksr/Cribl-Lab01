@@ -113,8 +113,9 @@ Observe the Test Results confirming your sample data was sent and received by th
 
 ### 5.  Configure a S3 Bucket as Destination
  
-For this task we will use an internal object storage solution to represent the S3 behavior or Simple Storage Service (Amazon S3). From the top menu select Data / Destinations. 
+For this task we will use an internal object storage solution to represent the S3 behavior or Simple Storage Service (Amazon S3). 
 
+- From the top menu select Data / Destinations. 
 - From the list of integrations select the MinIO tile
 - Click on Add New From the top right button
 
@@ -127,8 +128,8 @@ For this task we will use an internal object storage solution to represent the S
 - Key Prefix*: Cribl
 - Partitioning Expression: C.Time.strftime(_time ? _time : Date.now()/1000, '%Y/%m/%d')
 - Data Format: json
-- File Name Prefix Expression:  `CriblOut`
-- File Name Suffix Expression:  `.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}`
+- File Name Prefix Expression:  ** `CriblOut` **
+- File Name Suffix Expression:  ** `.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}` **
 - Compress: none
 - Backpressure behavior: Block
 - Tags: <LEAVE_EMPTY>
