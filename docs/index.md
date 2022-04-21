@@ -6,19 +6,19 @@ Cribl Stream is an observability pipeline tool living between any data source an
 
 Stream uses Sources, Destinations, Routes and Pipelines to move data coming from its sources, processes through its pipelines (group of functions) and send the results to one or many destinations in the format that is best for the environment and its use cases.
 
-## This Labs has 3 parts:
+## This Labs has 3 Modules:
 
-**Part 1 – Introduction to Stream elements**
+**Module 1 – Introduction to Stream elements**
 
-**Part 2 – Routes and Pipelines**
+**Module 2 – Routes and Pipelines**
 
-**Part 3 – Answering to Use Cases**
+**Module 3 – Answering to Use Cases**
 
 Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to: [Cribl](http://10.233.36.248:9000)
 Login as Admin with the password of Go2atc4labs!
  
  
-## Part 1 – Introduction to Stream elements
+## Module 1 – Introduction to Stream elements
 
 ### 1.  Review Sources and Destinations
 
@@ -209,7 +209,7 @@ Follow the same process to add Elasticsearch as a second destination receiving t
 - Click Save.
 
 
-## Part 2 – Routes and Pipelines
+## Module 2 – Routes and Pipelines
 
 Now that we have successfully sent data via QuickConnect, lets use Routes to send data to the same destinations. 
 First let’s enable another Source from our Datagen (windows_xml). 
@@ -351,7 +351,7 @@ Now select from the top menu Data/Sources and click the Datagen tile.
 - Click Save.
   
   
-## Part 3 - Cribl Stream Use Cases
+## Module 3 - Cribl Stream Use Cases
  
 ### Reduction
 Let’s put in practice some of the techniques we learned so far.
