@@ -100,7 +100,13 @@ Your sources are listed on the left and under Manage Syslog Sources you may conf
 
 Your source has been configured, in this case Syslog, you may now send data from devices (firewalls, routers, servers, etc.) to the IP address for your Worker Node(s) and start receiving data. 
 
-*Note: no data has been stored on Cribl Stream.* 
+!!! tip
+
+    This is a test tip!
+
+!!! note 
+    
+    *No data has been stored on Cribl Stream.* 
  
 
 ### 3.  Configure a Splunk Destination
