@@ -137,7 +137,9 @@ For this task we will use an internal object storage solution to represent the S
 
 ![Cribl-Lab01-6](_images/Cribl-Lab01-6.png)
 
-- You will be back on the Destinations list. Wait until the Status becomes green and click on S3_Minio
+**You will be back on the Destinations list. Wait until the Status becomes green:
+
+- Click on S3_Minio
 - On the top menu (in the context window) click Test
 - On Select sample chose syslog.log and click Run Test
  
