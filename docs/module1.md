@@ -71,7 +71,7 @@ There may be Streaming, No Streaming and Other Destinations. These destinations 
 Streaming Destination will forward a continuous flow of data out of Stream to systems or connoting points such as Splunk HEC
 Non-Stream Destination wills send data to retention endpoints such as S3 buckets, Azure Blob Storage and others.
 Other Destinations will serve special purposes within the data flow.
-[Destinations}(<https://docs.cribl.io/logstream/destinations>)
+*More information on [Destinations](<https://docs.cribl.io/logstream/destinations>)*
 
 - Select Data/Sources > Sources from the top menu
 - Explore all sources available, filter at the bottom selected top menu for Collectors, Push, Pull, System and Internal sources.
@@ -99,6 +99,10 @@ Your sources are listed on the left and under Manage Syslog Sources you may conf
 ![Cribl-Lab01-3](_images/Cribl-Lab01-3.png)
 
 Your source has been configured, in this case Syslog, you may now send data from devices (firewalls, routers, servers, etc.) to the IP address for your Worker Node(s) and start receiving data.
+
+!!! tip
+
+    This is a test tip!
 
 ### 3.  Configure a Splunk Destination
 
@@ -157,7 +161,7 @@ For this task we will use an internal object storage solution to represent the S
 **Enter the following values:**
 
 - Output ID: S3_Minio
-- MinIO Endpoint*: <http://192.168.2.52:9000>
+- MinIO Endpoint: <http://192.168.2.52:9000>
 - MinIO Bucket Name*: 's3-syslog'
 - Staging Location*: $CRIBL_HOME/state/outputs/staging
 - Key Prefix*: Cribl
@@ -172,7 +176,7 @@ For this task we will use an internal object storage solution to represent the S
 
 ![Cribl-Lab01-6](_images/Cribl-Lab01-6.png)
 
-**You will be back on the Destinations list. Wait until the Status becomes green:**
+**You should be back on the Destinations list. Wait until the Status becomes green:**
 
 - Click on S3_Minio
 - On the top menu (in the context window) click Test
