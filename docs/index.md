@@ -4,7 +4,7 @@ Cribl Stream is an observability pipeline tool living between any data source an
 
 # Basic Elements
 
-Stream uses Sources, Destinations, Routes and Pipelines to move data coming from its sources, processes through its pipelines (group of functions) and send the results to one or many destinations in the format that is best for the environment and its use cases.
+
 
 ## This Labs has 3 Modules:
 
@@ -18,7 +18,7 @@ Stream uses Sources, Destinations, Routes and Pipelines to move data coming from
 
 ## Solution Overview
 
-Solution overview paragraph
+Cribl Stream uses Sources, Destinations, Routes and Pipelines to move incoming data sources, processes this data through its pipelines (group of functions) and send the results to one or many destinations in the format that is best for the desired use case.
 
 ## Environment Overview
 
