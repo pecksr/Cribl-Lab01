@@ -4,7 +4,7 @@ Cribl Stream is an observability pipeline tool living between any data source an
 
 # Basic Elements
 
-
+Stream uses Sources, Destinations, Routes and Pipelines to move data coming from its sources, processes through its pipelines (group of functions) and send the results to one or many destinations in the format that is best for the environment and its use cases.
 
 ## This Labs has 3 Modules:
 
@@ -18,7 +18,7 @@ Cribl Stream is an observability pipeline tool living between any data source an
 
 ## Solution Overview
 
-Cribl Stream uses Sources, Destinations, Routes and Pipelines to move incoming data sources, processes this data through its pipelines (group of functions) and send the results to one or many destinations in the format that is best for the desired use case.
+Solution overview paragraph
 
 ## Environment Overview
 
@@ -100,13 +100,12 @@ Your sources are listed on the left and under Manage Syslog Sources you may conf
 
 Your source has been configured, in this case Syslog, you may now send data from devices (firewalls, routers, servers, etc.) to the IP address for your Worker Node(s) and start receiving data. 
 
-!!! tip
+!!!note
+*No data has been stored on Cribl Stream.*
 
-    This is a test tip!
+**_NOTE:_** `This is my note!!`
 
-!!! note 
-    
-    *No data has been stored on Cribl Stream.* 
+
  
 
 ### 3.  Configure a Splunk Destination
