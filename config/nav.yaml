@@ -1,6 +1,8 @@
 
 nav:
 - About: 'about.md'
-- Introduction: 'module1.md'
+- Introduction to Stream elements: 'module1.md'
+- Routes and Pipelines: 'module2.md'
+- Answering to Use Cases: 'module3.md'
 - Conclusion: 'conclusion.md'
 - Guide: 'https://labdocs.apps.wwtatc.com/labdocs-docs/'
