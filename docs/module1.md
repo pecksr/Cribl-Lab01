@@ -18,7 +18,7 @@ Stream uses Sources, Destinations, Routes and Pipelines to move data coming from
 
 ## Solution Overview
 
-Solution overview paragraph
+Cribl puts you in full control of your observability data, providing data management that allows you to optimize the treatment of each of your data sources and multicast it to destinations of your choice--saving you time and money.
 
 ## Environment Overview
 
@@ -28,29 +28,23 @@ Solution overview paragraph
 
 ### Hardware and Software
 
-#### Category 1 Title
-
-- Item 1
-- Item 2
-
-#### Category X Title
-
-- Item 1
-- Item X
+Although each of the applications in this lab can run as Physical, Virtual, or Cloud, this environment is all virtual.
 
 ## Target Audience
 
-Paragraph detailing the intended audience for the lab.
+This Lab is intended for anyone interested in learning more about Cribl.
 
 ## Before You Begin
 
-Paragraph indicating any or no pre reqs for the lab. Also include any helpful knowledge to have before beginning.
+A basic understanding of how the processing of Data operates and the value Data Analytic applications like Splunk and Elastic bring to organizations around the world.
 
 ## Learning Outcomes
 
-Paragraph describing the outcomes a student should expect upon completion.
+This lab has given you an introduction to the Cribl Stream application and has walked you through configuring a few of its basic functions and features. Please look for more Cribl Labs in the future.
 
-Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to: [Cribl](http://10.233.36.248:9000)
+## To Begin
+
+Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to: [Cribl](<http://10.233.36.248:9000>)
 Login as Admin with the password of Go2atc4labs!
 
 ### **Module 1 – Introduction to Stream elements**
@@ -71,7 +65,10 @@ There may be Streaming, No Streaming and Other Destinations. These destinations 
 Streaming Destination will forward a continuous flow of data out of Stream to systems or connoting points such as Splunk HEC
 Non-Stream Destination wills send data to retention endpoints such as S3 buckets, Azure Blob Storage and others.
 Other Destinations will serve special purposes within the data flow.
-*More information on [Destinations](<https://docs.cribl.io/logstream/destinations>)*
+
+!!! note
+
+*For more information goto [Destinations](<https://docs.cribl.io/logstream/destinations>)*
 
 - Select Data/Sources > Sources from the top menu
 - Explore all sources available, filter at the bottom selected top menu for Collectors, Push, Pull, System and Internal sources.
@@ -98,11 +95,9 @@ Your sources are listed on the left and under Manage Syslog Sources you may conf
 
 ![Cribl-Lab01-3](_images/Cribl-Lab01-3.png)
 
-Your source has been configured, in this case Syslog, you may now send data from devices (firewalls, routers, servers, etc.) to the IP address for your Worker Node(s) and start receiving data.
+!!! note
 
-!!! tip
-
-    This is a test tip!
+*Your source has been configured, in this case Syslog, you may now send data from devices (firewalls, routers, servers, etc.) to the IP address for your Worker Node(s) and start receiving data.*
 
 ### 3.  Configure a Splunk Destination
 
