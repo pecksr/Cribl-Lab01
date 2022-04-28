@@ -44,7 +44,7 @@ This lab has given you an introduction to the Cribl Stream application and has w
 
 ## To Begin
 
-Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to: [Cribl](<http://10.233.36.248:9000>)
+Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to <http://10.233.36.248:9000>
 
 *Login:*
 
@@ -169,10 +169,10 @@ For this task we will use an internal object storage solution to represent the S
 - MinIO Bucket Name: **s3-syslog**
 - Staging Location*: **$CRIBL_HOME/state/outputs/staging**
 - Key Prefix: **Cribl**
-- Partitioning Expression: **C.Time.strftime(_time ?_time : Date.now()/1000, '%Y/%m/%d')**
+- Partitioning Expression: **`C.Time.strftime(_time ?_time : Date.now()/1000, '%Y/%m/%d')`**
 - Data Format: **json**
 - File Name Prefix Expression: **CriblOut**
-- File Name Suffix Expression:  **'.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}'**
+- File Name Suffix Expression:  **`.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}`**
 - Compress: **none**
 - Backpressure behavior: **Block**
 - Tags: <LEAVE_EMPTY>
