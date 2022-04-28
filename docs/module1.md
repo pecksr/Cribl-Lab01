@@ -224,8 +224,8 @@ Within Cribl Stream you can send data from sources to destinations already confi
 
 - From the top main menu *Select* **Routing/QuickConnect**
 - From Sources (left side) *Click* **+New Source**
-- From the new context window *Browse* to **System and Internal** 
-- *Mouse* over **Datagen** 
+- From the new context window *Browse* to **System and Internal**
+- *Mouse* over **Datagen**
 - *Click* **Select Existing**
 - From the list of available datagen sources *Select* **syslog’**
 - On the new context window *Click* **Yes**
@@ -235,7 +235,7 @@ Within Cribl Stream you can send data from sources to destinations already confi
 
 A new context window will present you a selection to choose how to process the data in this connected route.
 
-- *Click* **Passthru** (sending raw data to the destination, no pipelines applied) 
+- *Click* **Passthru** (sending raw data to the destination, no pipelines applied)
 - *Click* **Save**
 
 ![Cribl-Lab01-8](_images/Cribl-Lab01-8.png)
