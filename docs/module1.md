@@ -1,10 +1,10 @@
 # What is Cribl Stream?
 
-Cribl Stream is an observability pipeline tool living between any data source and any destination. These destinations can be systems of analysis (Splunk, Elastic, etc.) or systems of retention (S3 buckets, Data Lakes, etc.). Stream routes, reduces, replays and redacts data sources in flight.
+Cribl Stream is an observability pipeline tool living between any data source and any destination. These destinations can be data analysis applications (Splunk, Elastic, etc.) or systems of retention (S3 buckets, Data Lakes, etc.). Cribl Stream routes, reduces, replays and redacts data sources in flight.
 
 ## Basic Elements
 
-Stream uses Sources, Destinations, Routes and Pipelines to move data coming from its sources, processes through its pipelines (group of functions) and send the results to one or many destinations in the format that is best for the environment and its use cases.
+Cribl Stream uses Sources, Destinations, Routes and Pipelines to move data coming from its sources, processes that data through its pipelines (group of functions) and send the results to one or more destinations in the format that is best for the end user.
 
 ## This Lab has 3 Modules
 
@@ -18,13 +18,13 @@ Stream uses Sources, Destinations, Routes and Pipelines to move data coming from
 
 ## Solution Overview
 
-Cribl puts you in full control of your observability data, providing data management that allows you to optimize the treatment of each of your data sources and multicast it to destinations of your choice--saving you time and money.
+Cribl Stream puts you in full control of your observability data, providing data management that allows you to optimize the treatment of each of your data sources and multicast it to destinations of your choice--saving you time and money.
 
 ## Environment Overview
 
 ### Lab Diagram
 
-![lab name](_images/placeholder.png)
+![Cribl-Lab01-1](_images/Cribl-Lab01-Diagram.png)
 
 ### Hardware and Software
 
