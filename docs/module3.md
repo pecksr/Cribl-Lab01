@@ -25,6 +25,7 @@ Data / Source / DataGen
 - *Click* **Save**
 
 **Create a new pipeline from Processing / Pipelines:**
+
 !!! note
 *Your sample file “big_json_data.log” should be listed on the right panel)*
 
@@ -82,10 +83,10 @@ Just as we did in the **Configure a S3 Bucket as Destination** task lets configu
 - MinIO Bucket Name: **big-json**
 - Staging Location: **$CRIBL_HOME/state/outputs/staging**
 - Key Prefix: **Cribl**
-- Partitioning Expression: **C.Time.strftime(_time ?_time : Date.now()/1000, '%Y/%m/%d')**
+- Partitioning Expression: **`C.Time.strftime(_time ?_time : Date.now()/1000, '%Y/%m/%d')`**
 - Data Format: **json**
 - File Name Prefix Expression: **CriblOut**
-- File Name Suffix Expression: **.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}**
+- File Name Suffix Expression: **`.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}`**
 - Compress: **none**
 - Backpressure behavior: **Block**
 - Tags: <LEAVE_EMPTY>
@@ -153,7 +154,7 @@ Now let’s replay the data sent into the S3 bucket configured above (Big_Json_r
 - Auto-populate from: <LEAVE_BLANK>
 - S3 Bucket: **big-json**
 - Region: <LEAVE_BLANK>
-- Path: **/Cribl/${_time:%Y}/${_time:%m}/${_time:%d}/**
+- Path: `/Cribl/${_time:%Y}/${_time:%m}/${_time:%d}/`
 - Path Extractors: <LEAVE_BLANK>
 - Recursive: **Yes**
 - Max Batch Size (objects): **10**
@@ -362,7 +363,7 @@ For the Redacting usecase we will use a different data source (Business Events).
 - Match Regex: **([0-9]{14,16})**  
 Note: Make sure to *Click* on the flags icon and *Select* /g for Global
 
-- Replace Expression: **C.Mask.isCC(g1) ? C.Mask.md5(g1, g1.length) : g1**
+- Replace Expression: **`C.Mask.isCC(g1) ? C.Mask.md5(g1, g1.length) : g1`**
 - Apply to Fields: *
 
 - *Click* **Save**
