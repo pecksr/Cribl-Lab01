@@ -45,7 +45,11 @@ This lab has given you an introduction to the Cribl Stream application and has w
 ## To Begin
 
 Access your Cribl Stream instance from the jump box provided using the Chrome web browser pointing to: [Cribl](<http://10.233.36.248:9000>)
-Login as Admin with the password of Go2atc4labs!
+
+*Login:*
+
+- Username: **Admin**
+- Password: **Go2atc4labs!**
 
 ### **Module 1 – Introduction to Stream elements**
 
@@ -84,7 +88,7 @@ Your sources are listed on the left and under Manage Syslog Sources you may conf
 
 ### 2.  Configure a Source
 
-- From the top menu *Select* **Data/Sources** > **Sources** then from Push select Syslog
+- From the top menu *Select* **Data/Sources** > **Sources** then from **Push** *Select* **Syslog**
 - *Click* **Add New** from the top right button
 
 **Enter the following values:**
@@ -114,8 +118,9 @@ Your sources are listed on the left and under Manage Syslog Sources you may conf
 - Port: **9997**
 - Backpressure behavior: **Block**
 - *Click* **Save** and wait for the Live status to become green
-- *Click* **Splunk_Lab** destination
-- *Select* **Test** in the context top menu and for **Select Sample** chose syslog.log
+- *Click* **Splunk_Lab** **Destination**
+- *Select* **Test** in the context top menu and for **Select Sample**
+- *Select* **syslog.log**
 - *Click* **Run Test**
 
 Observe the Test Results confirming your sample data was sent and received by the configured destination (Splunk_Lab)
@@ -161,13 +166,13 @@ For this task we will use an internal object storage solution to represent the S
 
 - Output ID: **S3_Minio**
 - MinIO Endpoint: <http://192.168.2.52:9000>
-- MinIO Bucket Name: **'s3-syslog'**
+- MinIO Bucket Name: **s3-syslog**
 - Staging Location*: **$CRIBL_HOME/state/outputs/staging**
 - Key Prefix: **Cribl**
 - Partitioning Expression: **C.Time.strftime(_time ?_time : Date.now()/1000, '%Y/%m/%d')**
 - Data Format: **json**
 - File Name Prefix Expression: **CriblOut**
-- File Name Suffix Expression:  **`.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}`**
+- File Name Suffix Expression:  **'.${C.env["CRIBL_WORKER_ID"]}.${__format}${__compression === "gzip" ? ".gz" : ""}'**
 - Compress: **none**
 - Backpressure behavior: **Block**
 - Tags: <LEAVE_EMPTY>
@@ -175,7 +180,7 @@ For this task we will use an internal object storage solution to represent the S
 
 ![Cribl-Lab01-6](_images/Cribl-Lab01-6.png)
 
-**You should be back on the Destinations list. Wait until the Status becomes green:**
+**You should be back on the *Destinations* list. Wait until the Status becomes green:**
 
 - *Click* **S3_Minio**
 - On the top menu (in the context window) *Click* **Test**
@@ -219,31 +224,37 @@ Within Cribl Stream you can send data from sources to destinations already confi
 
 - From the top main menu *Select* **Routing/QuickConnect**
 - From Sources (left side) *Click* **+New Source**
-- From the new context window *Browse* to **System and Internal** and mouse over **Datagen** then *Click* **Select Existing**
-- From the list of available datagen sources, *Select* **syslog’**
+- From the new context window *Browse* to **System and Internal** 
+- *Mouse* over **Datagen** 
+- *Click* **Select Existing**
+- From the list of available datagen sources *Select* **syslog’**
 - On the new context window *Click* **Yes**
-- Back on the **Quick Connect** panel *Click and drag* the mouse connecting the **Datagen/syslog** (+ sign) to the **Splunk Single Instance(SplunkCriblLab)** connecting both objects.
+- Back on the **Quick Connect** panel *Click and drag* the **Datagen/syslog (+ sign)** to the **Splunk Single Instance(SplunkCriblLab)** connecting both objects.
 
 ### 8.  Apply a passthrough and 1 pipeline to the QuickConnect route
 
 A new context window will present you a selection to choose how to process the data in this connected route.
 
-- *Click* **Passthru** (sending raw data to the destination, no pipelines applied) *Click* **Save**
+- *Click* **Passthru** (sending raw data to the destination, no pipelines applied) 
+- *Click* **Save**
 
 ![Cribl-Lab01-8](_images/Cribl-Lab01-8.png)
 
 ### 9.  Analyze the results in Splunk or Elastic (Splunk and Elastic dashboards being created for richer visualization and value realization)
 
-- *Mouse over* **Single Instance (SplunkCriblLab)** **Destination** and *Click* **Capture** to display if data is being sent to the selected destination.
+- *Mouse over* **Single Instance (SplunkCriblLab)** **Destination**
+- *Click* **Capture** to display if data is being sent to the selected destination.
 - From the new context window validate if syslog data (your datagen source in this case) is being sent to the Splunk Single Instance configured.
 
 ![Cribl-Lab01-9](_images/Cribl-Lab01-9.png)
 
 Follow the same process to add Elasticsearch as a second destination receiving the same source (Datagen syslog) already sending data to Splunk Single Instance.
 
-- *Mouse over* **Elasticsearch** and *Click* **Capture** to validate if data is being sent to the configured destination.
-- *Select* from the top menu **Data/Sources** and *Click* the **Datagen** tile.
+- *Mouse over* **Elasticsearch**
+- *Click* **Capture** to validate if data is being sent to the configured destination.
+- *Select* from the top menu **Data/Sources**
+- *Click* the **Datagen** tile
 - In the syslog datagen source, *Click* **Connected Destinations** from the left menu.
 - On the right pane *Click* **Send to Routes**
-- From the new context window *lick* **Yes**
+- From the new context window *Click* **Yes**
 - *Click* **Save**
